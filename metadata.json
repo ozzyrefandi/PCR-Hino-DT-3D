@@ -1,0 +1,6 @@
+{
+  "name": "MINEROZ | HINO 500 X-Ray 3D & Component Lifetime Explorer",
+  "description": "Interactive 3D visualization and Heavy Mining Component Lifetime (HM) explorer for HINO 500 mining dump trucks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
