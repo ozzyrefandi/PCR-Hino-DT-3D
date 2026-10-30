@@ -32,7 +32,7 @@ import { ModelUploadModal } from './components/ui/ModelUploadModal';
 import { ThresholdSettingsModal } from './components/ui/ThresholdSettingsModal';
 import { DataImportExportModal } from './components/ui/DataImportExportModal';
 import { FleetManagerModal } from './components/ui/FleetManagerModal';
-import { Truck, CheckCircle2, Shield, Wrench } from 'lucide-react';
+import { Truck, CheckCircle2, Shield, Wrench, Linkedin, Youtube, Link, Coffee, ExternalLink } from 'lucide-react';
 
 export default function App() {
   // Fleet & Multi-Unit State (10 Dump Truck Units)
@@ -330,32 +330,75 @@ export default function App() {
         />
       </main>
 
-      {/* 4. INDUSTRIAL TECHNICAL FOOTER */}
-      <footer className="relative z-10 bg-[#080a0e] border-t border-slate-800/90 px-3 lg:px-6 py-1.5 flex flex-wrap items-center justify-between text-[11px] text-slate-400 font-tech">
+      {/* 4. INDUSTRIAL TECHNICAL FOOTER WITH SOCIAL LINKS */}
+      <footer className="relative z-10 bg-[#080a0e] border-t border-slate-800/90 px-3 lg:px-6 py-1.5 flex flex-wrap items-center justify-between gap-2.5 text-[11px] text-slate-400 font-tech">
         {/* Left Tagline */}
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-amber-400 glow-yellow-sm" />
           <span className="text-amber-400 font-bold tracking-wider">MINEROZ</span>
           <span className="text-slate-600">|</span>
-          <span className="tracking-widest text-slate-300">
+          <span className="tracking-widest text-slate-300 hidden sm:inline">
             RIGHT COMPONENT • RIGHT TIME • RIGHT COST
           </span>
         </div>
 
-        {/* Center Pillars */}
-        <div className="hidden lg:flex items-center gap-4 text-[10px] text-slate-400 tracking-wider">
-          <span>PLAN LEBIH TEPAT</span>
-          <span>•</span>
-          <span>MONITOR LEBIH MUDAH</span>
-          <span>•</span>
-          <span>MAINTENANCE LEBIH EFISIEN</span>
-          <span>•</span>
-          <span>PRODUCTION LEBIH MAKSIMAL</span>
+        {/* Center / Social & Community Links */}
+        <div className="flex items-center flex-wrap gap-1.5 sm:gap-2">
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/ozzy-refandi-420b2787/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d131f] hover:bg-[#0a66c2]/20 border border-slate-700/80 hover:border-[#0a66c2]/80 text-slate-300 hover:text-white transition-all text-[11px] font-medium tracking-wide shadow-xs"
+            title="Kunjungi LinkedIn Ozzy Refandi"
+          >
+            <Linkedin className="w-3.5 h-3.5 text-[#0a66c2] group-hover:scale-110 transition-transform" />
+            <span className="font-sans font-semibold">LinkedIn</span>
+            <ExternalLink className="w-2.5 h-2.5 text-slate-500 opacity-60 group-hover:opacity-100" />
+          </a>
+
+          {/* YouTube */}
+          <a
+            href="https://www.youtube.com/@ozzyrefandi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#160d0e] hover:bg-[#ff0000]/20 border border-slate-700/80 hover:border-[#ff0000]/80 text-slate-300 hover:text-white transition-all text-[11px] font-medium tracking-wide shadow-xs"
+            title="Kunjungi YouTube Channel @ozzyrefandi"
+          >
+            <Youtube className="w-3.5 h-3.5 text-[#ff0000] group-hover:scale-110 transition-transform" />
+            <span className="font-sans font-semibold">YouTube</span>
+            <ExternalLink className="w-2.5 h-2.5 text-slate-500 opacity-60 group-hover:opacity-100" />
+          </a>
+
+          {/* Lynk.id */}
+          <a
+            href="https://lynk.id/ozzyrefandi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0d161a] hover:bg-cyan-500/20 border border-slate-700/80 hover:border-cyan-500/80 text-slate-300 hover:text-cyan-200 transition-all text-[11px] font-medium tracking-wide shadow-xs"
+            title="Kunjungi Lynk.id/ozzyrefandi"
+          >
+            <Link className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <span className="font-sans font-semibold">Lynk</span>
+            <ExternalLink className="w-2.5 h-2.5 text-slate-500 opacity-60 group-hover:opacity-100" />
+          </a>
+
+          {/* Traktiran Kopi */}
+          <a
+            href="https://clicky.id/ozzyrefandi/traktiran-kopi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 px-3 py-1 rounded bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/60 hover:border-amber-400 text-amber-300 hover:text-amber-200 transition-all text-[11px] font-bold tracking-wide shadow-sm shadow-amber-950/40"
+            title="Traktiran Kopi - Dukung Kreator di clicky.id"
+          >
+            <Coffee className="w-3.5 h-3.5 text-amber-400 group-hover:rotate-12 transition-transform" />
+            <span className="font-sans">Traktiran Kopi</span>
+            <span className="text-[10px] bg-amber-400/20 text-amber-300 px-1 rounded text-xs ml-0.5">☕</span>
+          </a>
         </div>
 
         {/* Right Status */}
-        <div className="flex items-center gap-3 text-[10px] font-code text-slate-400">
-          <span className="hidden sm:inline">DATA STORAGE: BROWSER LOCAL</span>
+        <div className="hidden xl:flex items-center gap-3 text-[10px] font-code text-slate-400">
           <span className="text-emerald-400 font-semibold flex items-center gap-1">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
             STANDAR OPERASIONAL TAMBANG
