@@ -23,6 +23,7 @@ import {
   Trash2,
   Tag,
   Filter,
+  TrendingUp,
 } from 'lucide-react';
 import {
   HinoComponent,
@@ -51,6 +52,7 @@ interface ComponentDetailPanelProps {
     record: Omit<MaintenanceRecord, 'id' | 'componentId'>
   ) => void;
   onDeleteMaintenanceRecord?: (componentId: string, recordId: string) => void;
+  onOpenTrendModal?: (componentId: string) => void;
 }
 
 export const ComponentDetailPanel: React.FC<ComponentDetailPanelProps> = ({
@@ -62,6 +64,7 @@ export const ComponentDetailPanel: React.FC<ComponentDetailPanelProps> = ({
   onUpdateComponentHm,
   onAddMaintenanceRecord,
   onDeleteMaintenanceRecord,
+  onOpenTrendModal,
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'history'>('overview');
   const [isEditingHm, setIsEditingHm] = useState(false);
@@ -361,6 +364,32 @@ export const ComponentDetailPanel: React.FC<ComponentDetailPanelProps> = ({
             </div>
           </div>
 
+          {/* Dedicated Trend Degradation & Scheduled PM Button */}
+          <button
+            onClick={() => onOpenTrendModal?.(component.id)}
+            className="w-full flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-amber-500/15 via-amber-500/10 to-transparent hover:from-amber-500/25 hover:via-amber-500/15 hover:to-amber-500/5 border border-amber-500/40 hover:border-amber-400 text-amber-300 transition-all shadow-sm group cursor-pointer"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="font-tech font-bold text-xs text-white group-hover:text-amber-200 flex items-center gap-1.5">
+                  <span>ANALISIS TREND DEGRADASI HM</span>
+                  <span className="text-[9px] bg-amber-400/20 text-amber-300 px-1 rounded font-mono font-bold">
+                    RECHARTS
+                  </span>
+                </div>
+                <div className="text-[10px] text-slate-400 font-sans">
+                  Grafik Garis: Actual HM vs Jadwal PM & Degradasi
+                </div>
+              </div>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 font-bold border border-amber-400/30 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">
+              Lihat Grafik →
+            </span>
+          </button>
+
           {/* Quick link to Maintenance History Banner */}
           <div
             onClick={() => setActiveTab('history')}
@@ -463,17 +492,28 @@ export const ComponentDetailPanel: React.FC<ComponentDetailPanelProps> = ({
                 </span>
               </div>
 
-              <button
-                onClick={() => {
-                  setFormHm(component.actualHm);
-                  setFormWorkOrder(`WO-HN500-${Date.now().toString().slice(-4)}`);
-                  setIsAddRecordOpen(true);
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-tech font-bold bg-amber-500 hover:bg-amber-400 text-black transition-colors shadow-sm"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>Catat Servis Baru</span>
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => onOpenTrendModal?.(component.id)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded text-xs font-tech font-bold bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 border border-amber-500/40 transition-colors shadow-xs"
+                  title="Buka Visualisasi Trend Degradasi HM Recharts"
+                >
+                  <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="hidden sm:inline">Trend HM</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setFormHm(component.actualHm);
+                    setFormWorkOrder(`WO-HN500-${Date.now().toString().slice(-4)}`);
+                    setIsAddRecordOpen(true);
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-tech font-bold bg-amber-500 hover:bg-amber-400 text-black transition-colors shadow-sm"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Catat Servis</span>
+                </button>
+              </div>
             </div>
 
             {/* Search Box & Service Filter */}

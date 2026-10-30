@@ -32,6 +32,8 @@ import { ModelUploadModal } from './components/ui/ModelUploadModal';
 import { ThresholdSettingsModal } from './components/ui/ThresholdSettingsModal';
 import { DataImportExportModal } from './components/ui/DataImportExportModal';
 import { FleetManagerModal } from './components/ui/FleetManagerModal';
+import { DegradationTrendModal } from './components/ui/DegradationTrendModal';
+import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { Truck, CheckCircle2, Shield, Wrench, Linkedin, Youtube, Link, Coffee, ExternalLink } from 'lucide-react';
 
 export default function App() {
@@ -75,6 +77,7 @@ export default function App() {
   const [isThresholdModalOpen, setIsThresholdModalOpen] = useState<boolean>(false);
   const [isDataModalOpen, setIsDataModalOpen] = useState<boolean>(false);
   const [isFleetModalOpen, setIsFleetModalOpen] = useState<boolean>(false);
+  const [isTrendModalOpen, setIsTrendModalOpen] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   // Active Selected Component Object
@@ -252,6 +255,12 @@ export default function App() {
         onOpenPosterModal={() => setIsPosterModalOpen(true)}
         onOpenUploadModal={() => setIsUploadModalOpen(true)}
         onOpenFleetModal={() => setIsFleetModalOpen(true)}
+        onOpenTrendModal={() => {
+          if (!selectedComponentId && components.length > 0) {
+            setSelectedComponentId(components[0].id);
+          }
+          setIsTrendModalOpen(true);
+        }}
         fleet={fleet}
         activeUnitId={activeUnitId}
         onSelectActiveUnit={handleSelectActiveUnit}
@@ -313,6 +322,10 @@ export default function App() {
             onUpdateComponentHm={handleUpdateComponentHm}
             onAddMaintenanceRecord={handleAddMaintenanceRecord}
             onDeleteMaintenanceRecord={handleDeleteMaintenanceRecord}
+            onOpenTrendModal={(compId) => {
+              setSelectedComponentId(compId);
+              setIsTrendModalOpen(true);
+            }}
           />
         )}
 
@@ -453,6 +466,19 @@ export default function App() {
         onUpdateComponents={handleUpdateComponents}
         onOpenFleetModal={() => setIsFleetModalOpen(true)}
       />
+
+      {/* Degradation Trend Modal */}
+      {isTrendModalOpen && (
+        <DegradationTrendModal
+          isOpen={isTrendModalOpen}
+          onClose={() => setIsTrendModalOpen(false)}
+          selectedComponent={selectedComponent}
+          allComponents={components}
+          onSelectComponent={(compId) => setSelectedComponentId(compId)}
+          thresholds={thresholds}
+          unitCode={activeUnit?.unitCode || 'DT-088'}
+        />
+      )}
     </div>
   );
 }

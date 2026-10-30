@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Check,
   Plus,
+  TrendingUp,
 } from 'lucide-react';
 import { ViewMode, DumpTruckUnit } from '../../types';
 
@@ -22,6 +23,7 @@ interface HeaderProps {
   onOpenPosterModal: () => void;
   onOpenUploadModal: () => void;
   onOpenFleetModal: () => void;
+  onOpenTrendModal?: () => void;
   fleet: DumpTruckUnit[];
   activeUnitId: string;
   onSelectActiveUnit: (unitId: string) => void;
@@ -37,6 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenPosterModal,
   onOpenUploadModal,
   onOpenFleetModal,
+  onOpenTrendModal,
   fleet,
   activeUnitId,
   onSelectActiveUnit,
@@ -220,6 +223,16 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <Image className="w-3.5 h-3.5 text-amber-400" />
           <span className="hidden md:inline">Poster Referensi</span>
+        </button>
+
+        {/* Trend HM & PM Schedule Modal (Recharts) */}
+        <button
+          onClick={onOpenTrendModal}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-tech tracking-wider text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 transition-colors"
+          title="Visualisasi Trend Degradasi HM vs Jadwal PM (Recharts)"
+        >
+          <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
+          <span className="hidden md:inline">Trend HM</span>
         </button>
 
         {/* Upload Custom GLB Model */}
